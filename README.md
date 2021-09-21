@@ -3,7 +3,9 @@ Use a per-project custom Unity-BlenderToFBX.py. A custom one is included in this
 
 # How to install
 In Unity go to Window > Package Manager, click on the + button, `Add package from git URL...` and paste:
+
 > https://github.com/forestrf/Custom-Blender-Unity-Import-Settings.git
+
 That's it.
 
 # How to use
