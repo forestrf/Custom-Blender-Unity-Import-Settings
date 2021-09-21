@@ -1,0 +1,23 @@
+{
+    "name": "com.ashkatchap.Custom-Blender-Unity-Import-Settings",
+    "displayName": "Custom Blender Unity Import Settings",
+    "description": "Indicate a per-project custom Unity-BlenderToFBX.py. A custom one is included here that fixes importing no UV by using the default export settings from Blender instead of custom ones that sometimes fail for some misic reason.",
+    "unity": "2019.4",
+    "version": "1.0.0",
+    "category": "editor extensions",
+    "dependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/forestrf/Custom-Blender-Unity-Import-Settings.git"
+    },
+    "author": {
+        "name": "Andrés Leone",
+        "email": "forestrf@gmail.com",
+        "url": "https://github.com/forestrf"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/forestrf/Custom-Blender-Unity-Import-Settings/issues"
+    },
+    "homepage": "https://github.com/forestrf/Custom-Blender-Unity-Import-Settings#readme"
+}
