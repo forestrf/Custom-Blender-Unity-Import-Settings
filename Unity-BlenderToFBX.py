@@ -23,8 +23,15 @@ if not blender280:
             raise
 
 # Find the Blender output file
+import sys
 import os
-outfile = os.getenv("UNITY_BLENDER_EXPORTER_OUTPUT_FILE")
+argv = sys.argv
+try:
+    # UNITY 2022+
+    outfile = ' '.join(argv[argv.index("--") + 1:])
+except:
+    # UNITY 2021 and before
+    outfile = os.getenv("UNITY_BLENDER_EXPORTER_OUTPUT_FILE")
 
 # Do the conversion
 print("Starting blender to FBX conversion " + outfile)
