@@ -6,9 +6,9 @@ class CustomBlenderUnityImportSettings : AssetPostprocessor {
 	void OnPreprocessModel() {
 		if (!assetPath.Contains(".blend")) return;
 
-		if (dst == null || replacement == null) Init();
+		if (!Check()) Init();
 
-		if (0 == count++ && !string.IsNullOrEmpty(replacement)) {
+		if (0 == count++ && Check()) {
 			//Debug.Log("Applied custom blender importing settings");
 			File.WriteAllText(dst, replacement);
 		}
@@ -17,7 +17,7 @@ class CustomBlenderUnityImportSettings : AssetPostprocessor {
 	void OnPostprocessModel(GameObject _) {
 		if (!assetPath.Contains(".blend")) return;
 
-		if (--count == 0 && !string.IsNullOrEmpty(replacement)) {
+		if (--count == 0 && Check()) {
 			//Debug.Log("Restored Unity's original blender importing settings");
 			File.WriteAllText(dst, original);
 		}
@@ -26,6 +26,8 @@ class CustomBlenderUnityImportSettings : AssetPostprocessor {
 	static int count;
 	static string original, replacement;
 	static string dst;
+
+	static bool Check() => !string.IsNullOrEmpty(dst) && !string.IsNullOrEmpty(original) && !string.IsNullOrEmpty(replacement);
 
 	[InitializeOnLoadMethod]
 	static void Init() {
