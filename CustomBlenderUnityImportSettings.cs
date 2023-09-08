@@ -8,7 +8,7 @@ class CustomBlenderUnityImportSettings : AssetPostprocessor {
 
 		if (dst == null || replacement == null) Init();
 
-		if (0 == count++) {
+		if (0 == count++ && !string.IsNullOrEmpty(replacement)) {
 			//Debug.Log("Applied custom blender importing settings");
 			File.WriteAllText(dst, replacement);
 		}
@@ -17,7 +17,7 @@ class CustomBlenderUnityImportSettings : AssetPostprocessor {
 	void OnPostprocessModel(GameObject _) {
 		if (!assetPath.Contains(".blend")) return;
 
-		if (--count == 0) {
+		if (--count == 0 && !string.IsNullOrEmpty(replacement)) {
 			//Debug.Log("Restored Unity's original blender importing settings");
 			File.WriteAllText(dst, original);
 		}
@@ -30,7 +30,10 @@ class CustomBlenderUnityImportSettings : AssetPostprocessor {
 	[InitializeOnLoadMethod]
 	static void Init() {
 		var guids = AssetDatabase.FindAssets("Unity-BlenderToFBX");
-		if (guids.Length == 0) throw new System.Exception("Unity-BlenderToFBX.py not found in the project assets, so no copy of it will be performed");
+		if (guids.Length == 0) {
+			Debug.LogError("Unity-BlenderToFBX.py not found in the project assets, so no copy of it will be performed");
+			return;
+		}
 
 		string guid = guids[0];
 		if (guids.Length > 0) {
